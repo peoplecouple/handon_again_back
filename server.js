@@ -16,13 +16,13 @@ let corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, '../build')))
+app.use(express.static(path.join(__dirname, '../client/build')))
 
 const db = mysql.createPool({
   host: "us-cdbr-east-06.cleardb.net",
-  user: "b4059dcc6b07b6",
-  password: "f9dc58c9",
-  database: "heroku_68c78cacbbb41ea",
+  user: "b4375de7ee8a60",
+  password: "d5095df6",
+  database: "heroku_8647caadca199fa",
 })
 
 
@@ -34,7 +34,7 @@ const db = mysql.createPool({
 
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, '../build/index.html'))
+  res.sendFile(path.join(__dirname, '../client/build/index.html'))
 });
 
 
@@ -48,7 +48,7 @@ app.get('/board', (req, res) => {
     }
     res.send(result);
   })
-  
+
 })
 
 app.post('/board/detail/', (req, res) => {
@@ -92,11 +92,11 @@ app.post('/board/delete', (req, res) => {
 
 
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../build/index.html'))
+  res.sendFile(path.join(__dirname, '../client/build/index.html'))
 });
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../build'))
+  app.use(express.static('../client/build'))
 }
 
 app.listen(port, () => {
